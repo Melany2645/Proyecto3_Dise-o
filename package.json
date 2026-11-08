@@ -1,0 +1,27 @@
+{
+  "name": "proyecto3_dise-o",
+  "version": "1.0.0",
+  "description": "Proyecto 3 de Diseño del Software",
+  "keywords": [
+    "node",
+    "js"
+  ],
+  "homepage": "https://github.com/Melany2645/Proyecto3_Dise-o#readme",
+  "bugs": {
+    "url": "https://github.com/Melany2645/Proyecto3_Dise-o/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Melany2645/Proyecto3_Dise-o.git"
+  },
+  "license": "ISC",
+  "author": "Melany Jirón y Jeremy Montero",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
