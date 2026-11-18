@@ -1,12 +1,10 @@
-import { ErrorApp } from "../errors/errores.js";
+import { ErrorApp } from "../errores/errores.js";
 
 /** Respuesta para rutas que no existen. */
 export function rutaNoEncontrada(req, res) {
-  res
-    .status(404)
-    .json({
-      error: { mensaje: `La ruta ${req.method} ${req.originalUrl} no existe.` },
-    });
+  res.status(404).json({
+    error: { mensaje: `La ruta ${req.method} ${req.originalUrl} no existe.` },
+  });
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -21,18 +19,14 @@ export function manejadorErrores(error, _req, res, _next) {
   }
 
   if (error.type === "entity.parse.failed") {
-    return res
-      .status(400)
-      .json({
-        error: { mensaje: "El cuerpo de la petición no es un JSON válido." },
-      });
+    return res.status(400).json({
+      error: { mensaje: "El cuerpo de la petición no es un JSON válido." },
+    });
   }
   if (error.type === "entity.too.large") {
-    return res
-      .status(413)
-      .json({
-        error: { mensaje: "El cuerpo de la petición es demasiado grande." },
-      });
+    return res.status(413).json({
+      error: { mensaje: "El cuerpo de la petición es demasiado grande." },
+    });
   }
 
   console.error(error);

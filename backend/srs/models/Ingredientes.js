@@ -1,4 +1,4 @@
-import { normalizar } from "../utils/texto.js";
+import { normalizar } from "../utilidades/texto.js";
 
 /**
  * Un ingrediente de una receta: qué es, cuánto se usa y en qué medida.

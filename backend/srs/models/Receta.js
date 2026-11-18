@@ -1,5 +1,5 @@
-import { Ingrediente } from "./Ingrediente.js";
-import { normalizar } from "../utils/texto.js";
+import { Ingrediente } from "./Ingredientes.js";
+import { normalizar } from "../utilidades/texto.js";
 
 /**
  * Una receta de repostería. Los dos componentes importantes de una receta, las porciones y los ingredintes

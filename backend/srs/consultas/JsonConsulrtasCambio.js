@@ -1,11 +1,11 @@
-import { ConsultasCambios } from "./ConsultasCambios.js";
+import { ConsultaRepository } from "./ConsulrasCambios.js";
 
 /**
  * una lista de ids con la receta más reciente primero, sin repetidos.
  * Se guardan más de las que se muestran (historialMaximo) para que, si se
  * elimina una receta, la lista de "recientes" se pueda seguir completando.
  */
-export class JsonConsultasCambios extends ConsultasCambios {
+export class JsonConsultasCambios extends ConsultaRepository {
   #almacen;
   #maximo;
 

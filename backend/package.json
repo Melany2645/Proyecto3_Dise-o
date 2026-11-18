@@ -17,11 +17,13 @@
   "license": "ISC",
   "author": "Melany Jirón y Jeremy Montero",
   "type": "module",
-  "main": "index.js",
+  "main": "srs/app.js",
   "scripts": {
+    "start": "node srs/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.3.0"
   },
   "devDependencies": {

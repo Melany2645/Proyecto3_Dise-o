@@ -1,3 +1,5 @@
+import { Router } from "express";
+
 export function crearRutasReceta(controlador) {
   const router = Router();
 
