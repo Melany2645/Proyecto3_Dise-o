@@ -4,6 +4,7 @@ import { ProveedorAnuncios } from "./accesibilidad/Anunciador";
 import { ContextoNavegacion, TituloPagina } from "./accesibilidad/TituloPagina";
 import { Layout } from "./componentes/Layout";
 import { claveDeRuta, useRuta } from "./navegacion/rutas";
+import { PaginaDetalle } from "./paginas/PaginaDetalle";
 import { PaginaLista } from "./paginas/PaginaLista";
 import { PaginaNoEncontrada } from "./paginas/PaginaNoEncontrada";
 
@@ -12,7 +13,7 @@ function Pagina({ ruta }) {
     case "lista":
       return <PaginaLista consulta={ruta.consulta} />;
     case "detalle":
-      return <TituloPagina>Detalle de la receta</TituloPagina>;
+      return <PaginaDetalle id={ruta.id} />;
     case "crear":
       return <TituloPagina>Nueva receta</TituloPagina>;
     case "editar":

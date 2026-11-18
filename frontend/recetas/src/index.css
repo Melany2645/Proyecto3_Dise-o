@@ -196,6 +196,83 @@ main:focus,
   outline: none;
 }
 
+/* ---------- Detalle de receta ---------- */
+.breadcrumb {
+  --bs-breadcrumb-item-active-color: #5c636a;
+}
+
+.datos-receta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.datos-receta dt {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #5c636a;
+}
+
+.datos-receta dd {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.ajuste-porciones {
+  background-color: var(--color-fondo-suave);
+  border: 1px solid #e3d5c8;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.ajuste-porciones .btn-link {
+  color: var(--color-primario);
+}
+
+/* Error: color con contraste + texto explicativo (no solo color). */
+.texto-error {
+  color: #a4161a; /* 7.0:1 sobre blanco */
+  font-weight: 600;
+}
+
+.resumen-ajuste {
+  font-weight: 600;
+}
+
+.tabla-ingredientes caption {
+  caption-side: top;
+  color: var(--color-texto);
+  font-weight: 600;
+}
+
+/* ---------- Diálogo modal ---------- */
+.dialogo {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0;
+  width: min(32rem, calc(100vw - 2rem));
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+}
+
+.dialogo::backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.dialogo-contenido {
+  padding: 1.5rem;
+}
+
+.btn[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.dialogo .btn[aria-disabled="true"] {
+  cursor: progress;
+}
+
 /* ---------- Preferencia de movimiento reducido (WCAG 2.3.3) ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,

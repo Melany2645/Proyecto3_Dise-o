@@ -47,7 +47,7 @@ export function Layout({ ruta, children }) {
 
       <footer className="pie-sitio">
         <div className="container py-3">
-          <p className="mb-0">Recetario de repostería · Proyecto 3 de Diseño de Software</p>
+          <p className="mb-0">Recetario de repostería</p>
         </div>
       </footer>
     </>
