@@ -19,6 +19,36 @@ export class ErrorApi extends Error {
   }
 }
 
+const MENSAJE_SIN_CONEXION =
+  "No se pudo conectar con el servidor. Verifique que el backend esté encendido e intente de nuevo.";
+
+/** Mensajes para cuando el backend no envía uno propio. */
+const MENSAJES_POR_ESTADO = {
+  400: "La información enviada no es válida. Revise los datos e intente de nuevo.",
+  404: "La receta solicitada no existe o ya fue eliminada.",
+  408: "El servidor tardó demasiado en responder. Intente de nuevo.",
+  413: "La información enviada es demasiado grande. Reduzca el contenido e intente de nuevo.",
+  429: "Se hicieron demasiadas solicitudes seguidas. Espere un momento e intente de nuevo.",
+  500: "Ocurrió un problema interno en el servidor. Intente de nuevo en unos momentos.",
+  502: MENSAJE_SIN_CONEXION,
+  503: "El servidor no está disponible en este momento. Intente de nuevo en unos minutos.",
+  504: MENSAJE_SIN_CONEXION,
+};
+
+/**
+ * Elige el mensaje para el usuario: primero el que envía el backend (es el más
+ * específico) y si no hay, uno según el código HTTP.
+ */
+function mensajeDeError(estado, datos) {
+  if (datos?.error?.mensaje) return datos.error.mensaje;
+  // Sin cuerpo JSON y con 500: es el proxy de desarrollo avisando que el
+  // backend no responde, no un error del backend.
+  if (estado === 500 && datos === null) return MENSAJE_SIN_CONEXION;
+  if (MENSAJES_POR_ESTADO[estado]) return MENSAJES_POR_ESTADO[estado];
+  if (estado >= 500) return MENSAJES_POR_ESTADO[500];
+  return "No se pudo procesar la solicitud. Revise la información e intente de nuevo.";
+}
+
 async function solicitar(ruta, { metodo = "GET", cuerpo, signal } = {}) {
   let respuesta;
   try {
@@ -30,10 +60,7 @@ async function solicitar(ruta, { metodo = "GET", cuerpo, signal } = {}) {
     });
   } catch (error) {
     if (error.name === "AbortError") throw error;
-    throw new ErrorApi(
-      "No se pudo conectar con el servidor. Verifique que el backend esté encendido.",
-      0,
-    );
+    throw new ErrorApi(MENSAJE_SIN_CONEXION, 0);
   }
 
   if (respuesta.status === 204) return null;
@@ -47,7 +74,7 @@ async function solicitar(ruta, { metodo = "GET", cuerpo, signal } = {}) {
 
   if (!respuesta.ok) {
     throw new ErrorApi(
-      datos?.error?.mensaje ?? `Ocurrió un error inesperado (código ${respuesta.status}).`,
+      mensajeDeError(respuesta.status, datos),
       respuesta.status,
       datos?.error?.detalles ?? [],
     );

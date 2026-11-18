@@ -149,6 +149,53 @@ main:focus,
   --bs-btn-disabled-border-color: var(--color-primario);
 }
 
+/* ---------- Lista de recetas ---------- */
+.tarjeta-busqueda,
+.tarjeta-recientes {
+  background-color: var(--color-fondo-suave);
+  border: 1px solid #e3d5c8;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+.tarjeta-receta {
+  border-color: #d9c7b6;
+}
+
+/* La tarjeta entera reacciona al pasar el mouse o al enfocar su enlace. */
+.tarjeta-receta:hover,
+.tarjeta-receta:focus-within {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 1px var(--color-primario);
+}
+
+.tarjeta-receta .card-title a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.lista-recientes li + li {
+  margin-top: 0.75rem;
+}
+
+.estado-vacio {
+  border: 2px dashed #d9c7b6;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.pagination {
+  --bs-pagination-active-bg: var(--color-primario);
+  --bs-pagination-active-border-color: var(--color-primario);
+  --bs-pagination-hover-color: var(--color-primario-mas-oscuro);
+  --bs-pagination-disabled-color: #5c636a; /* 6:1, legible aunque esté inactivo */
+}
+
+#titulo-resultados:focus {
+  outline: none;
+}
+
 /* ---------- Preferencia de movimiento reducido (WCAG 2.3.3) ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,

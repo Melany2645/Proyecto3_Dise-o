@@ -4,12 +4,13 @@ import { ProveedorAnuncios } from "./accesibilidad/Anunciador";
 import { ContextoNavegacion, TituloPagina } from "./accesibilidad/TituloPagina";
 import { Layout } from "./componentes/Layout";
 import { claveDeRuta, useRuta } from "./navegacion/rutas";
+import { PaginaLista } from "./paginas/PaginaLista";
 import { PaginaNoEncontrada } from "./paginas/PaginaNoEncontrada";
 
 function Pagina({ ruta }) {
   switch (ruta.nombre) {
     case "lista":
-      return <TituloPagina>Recetas</TituloPagina>;
+      return <PaginaLista consulta={ruta.consulta} />;
     case "detalle":
       return <TituloPagina>Detalle de la receta</TituloPagina>;
     case "crear":
