@@ -1,5 +1,48 @@
+import { useRef } from "react";
+
+import { ProveedorAnuncios } from "./accesibilidad/Anunciador";
+import { ContextoNavegacion, TituloPagina } from "./accesibilidad/TituloPagina";
+import { Layout } from "./componentes/Layout";
+import { claveDeRuta, useRuta } from "./navegacion/rutas";
+import { PaginaNoEncontrada } from "./paginas/PaginaNoEncontrada";
+
+function Pagina({ ruta }) {
+  switch (ruta.nombre) {
+    case "lista":
+      return <TituloPagina>Recetas</TituloPagina>;
+    case "detalle":
+      return <TituloPagina>Detalle de la receta</TituloPagina>;
+    case "crear":
+      return <TituloPagina>Nueva receta</TituloPagina>;
+    case "editar":
+      return <TituloPagina>Editar receta</TituloPagina>;
+    default:
+      return <PaginaNoEncontrada />;
+  }
+}
+
 function App() {
-  return <></>;
+  const ruta = useRuta();
+  const clave = claveDeRuta(ruta);
+
+  // Detecta navegaciones (cambio de ruta) para mover el foco al nuevo <h1>.
+  const claveAnterior = useRef(clave);
+  const debeEnfocar = useRef(false);
+  if (claveAnterior.current !== clave) {
+    claveAnterior.current = clave;
+    debeEnfocar.current = true;
+  }
+
+  return (
+    <ProveedorAnuncios>
+      <ContextoNavegacion.Provider value={debeEnfocar}>
+        <Layout ruta={ruta}>
+          {/* key: cada ruta monta su página desde cero (estado limpio). */}
+          <Pagina key={clave} ruta={ruta} />
+        </Layout>
+      </ContextoNavegacion.Provider>
+    </ProveedorAnuncios>
+  );
 }
 
 export default App;
