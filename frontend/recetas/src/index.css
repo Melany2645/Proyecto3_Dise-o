@@ -247,6 +247,70 @@ main:focus,
   font-weight: 600;
 }
 
+/* ---------- Formulario de receta ---------- */
+.grupo-formulario {
+  border: 1px solid #e3d5c8;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.grupo-formulario > legend {
+  float: none;
+  width: auto;
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.lista-ingredientes-form > li + li {
+  margin-top: 0.75rem;
+}
+
+.ingrediente-form {
+  background-color: var(--color-fondo-suave);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.ingrediente-form > legend {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Alinea el botón "Quitar" con los campos (que tienen etiqueta encima). */
+@media (min-width: 768px) {
+  .boton-quitar {
+    padding-top: 2rem;
+  }
+}
+
+.form-control.is-invalid {
+  border-color: #a4161a;
+}
+
+.resumen-errores {
+  border: 3px solid #a4161a;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.resumen-errores:focus-visible,
+.resumen-errores:focus {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 2px;
+}
+
+.resumen-errores h2 {
+  color: #a4161a;
+}
+
+.resumen-errores a {
+  color: #a4161a;
+  font-weight: 600;
+}
+
 /* ---------- Diálogo modal ---------- */
 .dialogo {
   border: none;

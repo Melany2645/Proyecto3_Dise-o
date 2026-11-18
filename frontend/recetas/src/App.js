@@ -1,10 +1,11 @@
 import { useRef } from "react";
 
 import { ProveedorAnuncios } from "./accesibilidad/Anunciador";
-import { ContextoNavegacion, TituloPagina } from "./accesibilidad/TituloPagina";
+import { ContextoNavegacion } from "./accesibilidad/TituloPagina";
 import { Layout } from "./componentes/Layout";
 import { claveDeRuta, useRuta } from "./navegacion/rutas";
 import { PaginaDetalle } from "./paginas/PaginaDetalle";
+import { PaginaFormulario } from "./paginas/PaginaFormulario";
 import { PaginaLista } from "./paginas/PaginaLista";
 import { PaginaNoEncontrada } from "./paginas/PaginaNoEncontrada";
 
@@ -15,9 +16,9 @@ function Pagina({ ruta }) {
     case "detalle":
       return <PaginaDetalle id={ruta.id} />;
     case "crear":
-      return <TituloPagina>Nueva receta</TituloPagina>;
+      return <PaginaFormulario />;
     case "editar":
-      return <TituloPagina>Editar receta</TituloPagina>;
+      return <PaginaFormulario id={ruta.id} />;
     default:
       return <PaginaNoEncontrada />;
   }
