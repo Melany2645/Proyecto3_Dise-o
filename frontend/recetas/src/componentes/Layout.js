@@ -22,7 +22,7 @@ export function Layout({ ruta, children }) {
       <header className="encabezado-sitio">
         <div className="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
           <a href={rutas.lista()} className="marca">
-            <span aria-hidden="true"></span>Recetario
+            Recetario
           </a>
           <nav aria-label="Principal">
             <ul className="nav gap-1">

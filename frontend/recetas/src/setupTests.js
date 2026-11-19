@@ -1,5 +1,15 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
+// Matchers de Testing Library para el DOM: toBeInTheDocument, toHaveFocus, etc.
+import "@testing-library/jest-dom";
+// Matcher toHaveNoViolations: revisa reglas WCAG / WAI-ARIA con axe-core.
+import { toHaveNoViolations } from "jest-axe";
+
+expect.extend(toHaveNoViolations);
+
+beforeEach(() => {
+  window.location.hash = "";
+  document.title = "";
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
