@@ -9,7 +9,7 @@ import { Paginacion } from "../componentes/Paginacion";
 import { RecetasRecientes } from "../componentes/RecetasRecientes";
 import { TarjetaReceta } from "../componentes/TarjetaReceta";
 import { useSolicitud } from "../hooks/useSolicitud";
-import { navegar, rutas } from "../navegacion/rutas";
+import { hashActual, reemplazar, rutas } from "../navegacion/rutas";
 import { pluralizar } from "../utilidades/formato";
 
 function leerPagina(valor) {
@@ -36,8 +36,6 @@ export function PaginaLista({ consulta }) {
   const recetas = datos?.datos ?? [];
   const paginacion = datos?.paginacion;
 
-  // Al terminar una búsqueda o cambio de página se anuncia el resultado;
-  // en la carga inicial no, porque el lector ya está leyendo el título.
   useEffect(() => {
     if (estado !== "listo" || !paginacion) return;
     if (esPrimeraCarga.current) {
@@ -56,13 +54,11 @@ export function PaginaLista({ consulta }) {
     }
   }, [estado, paginacion, anunciar]);
 
-  const buscar = (criterios) => {
+  const buscar = (criterios, { inmediata }) => {
     esPrimeraCarga.current = false;
     const destino = rutas.lista(criterios);
-    const actual = window.location.hash || "#/";
-    // Si la búsqueda es la misma, la URL no cambia: se vuelve a consultar igual.
-    if (actual === destino) recargar();
-    else navegar(destino);
+    if (hashActual() !== destino) reemplazar(destino);
+    else if (inmediata) recargar();
   };
 
   const hrefDePagina = (numero) =>
@@ -88,7 +84,11 @@ export function PaginaLista({ consulta }) {
         <div className="col-lg-8">
           <FormularioBusqueda nombre={nombre} ingrediente={ingrediente} alBuscar={buscar} />
 
-          <section aria-labelledby="titulo-resultados" aria-busy={estado === "cargando"}>
+          <section
+            id="resultados-recetas"
+            aria-labelledby="titulo-resultados"
+            aria-busy={estado === "cargando"}
+          >
             <div className="d-flex flex-wrap align-items-baseline justify-content-between gap-2 mb-3">
               <h2 id="titulo-resultados" ref={tituloResultados} tabIndex={-1} className="h4 mb-0">
                 {hayFiltros ? "Resultados de la búsqueda" : "Todas las recetas"}
@@ -97,11 +97,13 @@ export function PaginaLista({ consulta }) {
             </div>
 
             {estado === "cargando" && !datos && <Cargando texto="Cargando recetas…" />}
-            {estado === "error" && <MensajeError
+            {estado === "error" && (
+              <MensajeError
                 titulo="No se pudieron cargar las recetas."
                 error={error}
                 alReintentar={recargar}
-              />}
+              />
+            )}
 
             {datos && recetas.length === 0 && (
               <div className="estado-vacio">
@@ -130,7 +132,11 @@ export function PaginaLista({ consulta }) {
               <ul className="row row-cols-1 row-cols-md-2 g-3 list-unstyled">
                 {recetas.map((receta) => (
                   <li key={receta.id} className="col">
-                    <TarjetaReceta receta={receta} />
+                    <TarjetaReceta
+                      receta={receta}
+                      busquedaNombre={nombre}
+                      busquedaIngrediente={ingrediente}
+                    />
                   </li>
                 ))}
               </ul>

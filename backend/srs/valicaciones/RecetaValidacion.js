@@ -86,6 +86,19 @@ export class RecetaValidator {
     return { nombre, porciones, ingredientes };
   }
 
+  /** Valida el número de página del listado (por defecto, 1). */
+  validarPagina(pagina = 1) {
+    if (!Number.isInteger(pagina) || pagina < 1) {
+      throw new ErrorValidacion([
+        {
+          campo: "pagina",
+          mensaje: "La página debe ser un número entero de 1 o más.",
+        },
+      ]);
+    }
+    return pagina;
+  }
+
   #validarTexto(valor, campo, etiqueta, max, errores) {
     if (!esTextoNoVacio(valor)) {
       errores.push({ campo, mensaje: `${etiqueta} es obligatorio.` });

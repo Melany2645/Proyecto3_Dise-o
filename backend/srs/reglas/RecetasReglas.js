@@ -1,4 +1,4 @@
-import { ErrorNoEncontrado, ErrorValidacion } from "../errores/errores.js";
+import { ErrorNoEncontrado } from "../errores/errores.js";
 
 const porNombre = (a, b) =>
   a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" });
@@ -41,15 +41,8 @@ export class RecetaService {
    * Lista paginada de todas las recetas
    * @param {{pagina?: number, nombre?: string, ingrediente?: string}} consulta
    */
-  async listar({ pagina = 1, ...criterios } = {}) {
-    if (!Number.isInteger(pagina) || pagina < 1) {
-      throw new ErrorValidacion([
-        {
-          campo: "pagina",
-          mensaje: "La página debe ser un número entero de 1 o más.",
-        },
-      ]);
-    }
+  async listar({ pagina, ...criterios } = {}) {
+    const numeroPagina = this.#validador.validarPagina(pagina);
 
     const filtro = this.#constructorFiltros.construir(criterios);
     const todas = await this.#recetas.buscarTodas();
@@ -57,7 +50,7 @@ export class RecetaService {
       .filter((receta) => filtro.cumple(receta))
       .sort(porNombre);
 
-    return this.#paginador.paginar(filtradas, pagina);
+    return this.#paginador.paginar(filtradas, numeroPagina);
   }
 
   /** Devuelve la receta completa y la anota como "consultada" */

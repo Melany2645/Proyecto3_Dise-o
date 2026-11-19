@@ -1,35 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/**
- * Búsqueda por nombre y/o ingrediente.
- * - role="search" crea la región de búsqueda para lectores de pantalla.
- * - Cada campo tiene <label> visible asociado y una ayuda con aria-describedby.
- * - Los valores se sincronizan con la URL, así "Atrás" restaura la búsqueda.
- *
- * @param {{nombre: string, ingrediente: string,
- *          alBuscar: (criterios: {nombre: string, ingrediente: string}) => void}} props
- */
+export const ESPERA_BUSQUEDA_MS = 300;
+
 export function FormularioBusqueda({ nombre, ingrediente, alBuscar }) {
   const [valores, setValores] = useState({ nombre, ingrediente });
+  const alBuscarRef = useRef(alBuscar);
+  alBuscarRef.current = alBuscar;
 
   useEffect(() => {
-    setValores({ nombre, ingrediente });
+    setValores((previos) =>
+      previos.nombre.trim() === nombre && previos.ingrediente.trim() === ingrediente
+        ? previos
+        : { nombre, ingrediente },
+    );
   }, [nombre, ingrediente]);
+
+  useEffect(() => {
+    const criterios = { nombre: valores.nombre.trim(), ingrediente: valores.ingrediente.trim() };
+    if (criterios.nombre === nombre && criterios.ingrediente === ingrediente) return undefined;
+    const temporizador = setTimeout(
+      () => alBuscarRef.current(criterios, { inmediata: false }),
+      ESPERA_BUSQUEDA_MS,
+    );
+    return () => clearTimeout(temporizador);
+  }, [valores, nombre, ingrediente]);
 
   const cambiar = (evento) =>
     setValores((previos) => ({ ...previos, [evento.target.name]: evento.target.value }));
 
   const enviar = (evento) => {
     evento.preventDefault();
-    alBuscar({ nombre: valores.nombre.trim(), ingrediente: valores.ingrediente.trim() });
+    alBuscar(
+      { nombre: valores.nombre.trim(), ingrediente: valores.ingrediente.trim() },
+      { inmediata: true },
+    );
   };
 
   const limpiar = () => {
     setValores({ nombre: "", ingrediente: "" });
-    alBuscar({ nombre: "", ingrediente: "" });
+    alBuscar({ nombre: "", ingrediente: "" }, { inmediata: true });
   };
 
-  const hayFiltros = nombre !== "" || ingrediente !== "";
+  const hayFiltros =
+    nombre !== "" || ingrediente !== "" || valores.nombre !== "" || valores.ingrediente !== "";
 
   return (
     <form role="search" aria-labelledby="titulo-busqueda" onSubmit={enviar} className="tarjeta-busqueda mb-4">
@@ -37,7 +50,8 @@ export function FormularioBusqueda({ nombre, ingrediente, alBuscar }) {
         Buscar recetas
       </h2>
       <p id="ayuda-busqueda" className="text-body-secondary small mb-3">
-        Puede buscar por nombre, por ingrediente o por ambos. No importan mayúsculas ni tildes.
+        Los resultados se actualizan mientras escribe. Puede escribir solo una parte, por ejemplo
+        «pizza», y no importan mayúsculas ni tildes.
       </p>
 
       <div className="row g-3 align-items-end">
@@ -53,6 +67,7 @@ export function FormularioBusqueda({ nombre, ingrediente, alBuscar }) {
             value={valores.nombre}
             onChange={cambiar}
             aria-describedby="ayuda-busqueda"
+            aria-controls="resultados-recetas"
             autoComplete="off"
           />
         </div>
@@ -68,6 +83,7 @@ export function FormularioBusqueda({ nombre, ingrediente, alBuscar }) {
             value={valores.ingrediente}
             onChange={cambiar}
             aria-describedby="ayuda-busqueda"
+            aria-controls="resultados-recetas"
             autoComplete="off"
           />
         </div>

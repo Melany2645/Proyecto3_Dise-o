@@ -1,15 +1,10 @@
-/*
- * Estilos propios sobre Bootstrap 5.3.
- * La paleta se eligió para cumplir contraste WCAG 2.2 AA (≥ 4.5:1 en texto
- * normal y ≥ 3:1 en bordes/controles) sobre fondo blanco.
- */
 :root {
-  --color-primario: #8a3b12;        /* 8.0:1 sobre blanco */
+  --color-primario: #8a3b12;
   --color-primario-oscuro: #6b2d0d;
   --color-primario-mas-oscuro: #52220a;
   --color-fondo-suave: #fbf5ef;
   --color-texto: #212529;
-  --color-borde: #8c8c8c;           /* 3.4:1, bordes de controles */
+  --color-borde: #8c8c8c;
   --color-foco: #1f4fd1;
 
   --bs-link-color: var(--color-primario);
@@ -39,7 +34,6 @@ main {
   flex: 1;
 }
 
-/* ---------- Foco visible (WCAG 2.4.7 / 2.4.11) ---------- */
 :focus-visible {
   outline: 3px solid var(--color-foco);
   outline-offset: 2px;
@@ -56,13 +50,11 @@ main {
   box-shadow: none;
 }
 
-/* Los contenedores que reciben foco por programa no necesitan contorno. */
 main:focus,
 .titulo-pagina:focus {
   outline: none;
 }
 
-/* ---------- Enlace para saltar al contenido (WCAG 2.4.1) ---------- */
 .enlace-saltar {
   position: absolute;
   left: 1rem;
@@ -80,7 +72,6 @@ main:focus,
   top: 1rem;
 }
 
-/* ---------- Encabezado y pie ---------- */
 .encabezado-sitio {
   background-color: var(--color-fondo-suave);
   border-bottom: 1px solid #e3d5c8;
@@ -106,7 +97,6 @@ main:focus,
   text-decoration: underline;
 }
 
-/* La página actual se distingue por algo más que el color (WCAG 1.4.1). */
 .encabezado-sitio .nav-link[aria-current="page"] {
   color: var(--color-primario);
   font-weight: 700;
@@ -126,7 +116,6 @@ main:focus,
   margin-bottom: 1.5rem;
 }
 
-/* ---------- Botones con la paleta propia ---------- */
 .btn-primary {
   --bs-btn-bg: var(--color-primario);
   --bs-btn-border-color: var(--color-primario);
@@ -149,7 +138,6 @@ main:focus,
   --bs-btn-disabled-border-color: var(--color-primario);
 }
 
-/* ---------- Lista de recetas ---------- */
 .tarjeta-busqueda,
 .tarjeta-recientes {
   background-color: var(--color-fondo-suave);
@@ -162,7 +150,6 @@ main:focus,
   border-color: #d9c7b6;
 }
 
-/* La tarjeta entera reacciona al pasar el mouse o al enfocar su enlace. */
 .tarjeta-receta:hover,
 .tarjeta-receta:focus-within {
   border-color: var(--color-primario);
@@ -172,6 +159,14 @@ main:focus,
 .tarjeta-receta .card-title a {
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+.tarjeta-receta mark {
+  background-color: #ffe08a;
+  color: #212529;
+  padding: 0 0.1em;
+  border-radius: 0.2em;
+  font-weight: 700;
 }
 
 .lista-recientes li + li {
@@ -189,14 +184,13 @@ main:focus,
   --bs-pagination-active-bg: var(--color-primario);
   --bs-pagination-active-border-color: var(--color-primario);
   --bs-pagination-hover-color: var(--color-primario-mas-oscuro);
-  --bs-pagination-disabled-color: #5c636a; /* 6:1, legible aunque esté inactivo */
+  --bs-pagination-disabled-color: #5c636a;
 }
 
 #titulo-resultados:focus {
   outline: none;
 }
 
-/* ---------- Detalle de receta ---------- */
 .breadcrumb {
   --bs-breadcrumb-item-active-color: #5c636a;
 }
@@ -231,9 +225,8 @@ main:focus,
   color: var(--color-primario);
 }
 
-/* Error: color con contraste + texto explicativo (no solo color). */
 .texto-error {
-  color: #a4161a; /* 7.0:1 sobre blanco */
+  color: #a4161a;
   font-weight: 600;
 }
 
@@ -247,7 +240,6 @@ main:focus,
   font-weight: 600;
 }
 
-/* ---------- Formulario de receta ---------- */
 .grupo-formulario {
   border: 1px solid #e3d5c8;
   border-radius: 0.5rem;
@@ -278,7 +270,6 @@ main:focus,
   margin-bottom: 0.25rem;
 }
 
-/* Alinea el botón "Quitar" con los campos (que tienen etiqueta encima). */
 @media (min-width: 768px) {
   .boton-quitar {
     padding-top: 2rem;
@@ -311,7 +302,6 @@ main:focus,
   font-weight: 600;
 }
 
-/* ---------- Diálogo modal ---------- */
 .dialogo {
   border: none;
   border-radius: 0.5rem;
@@ -337,7 +327,6 @@ main:focus,
   cursor: progress;
 }
 
-/* ---------- Preferencia de movimiento reducido (WCAG 2.3.3) ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

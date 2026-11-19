@@ -1,16 +1,5 @@
 import { useEffect, useState } from "react";
 
-/**
- * Navegación basada en el hash de la URL (#/ruta), sin dependencias extra.
- * Permite usar enlaces reales (<a href>), el botón "Atrás" del navegador
- * y compartir/recargar la URL de una receta.
- *
- * Rutas:
- *   #/                      lista de recetas (acepta ?nombre=&ingrediente=&pagina=)
- *   #/recetas/nueva         formulario para crear
- *   #/recetas/:id           detalle de una receta
- *   #/recetas/:id/editar    formulario para editar
- */
 export const rutas = {
   lista: (consulta = {}) => {
     const parametros = new URLSearchParams();
@@ -44,13 +33,21 @@ export function interpretarHash(hash) {
   return { nombre: "noEncontrada", consulta };
 }
 
-/** Clave única de una ruta: si cambia, se considera una navegación nueva. */
 export function claveDeRuta(ruta) {
   return `${ruta.nombre}:${ruta.id ?? ""}`;
 }
 
 export function navegar(hash) {
   window.location.hash = hash;
+}
+
+export function reemplazar(hash) {
+  window.history.replaceState(null, "", hash);
+  window.dispatchEvent(new HashChangeEvent("hashchange"));
+}
+
+export function hashActual() {
+  return window.location.hash || "#/";
 }
 
 export function useRuta() {

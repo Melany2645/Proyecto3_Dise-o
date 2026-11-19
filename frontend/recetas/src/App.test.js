@@ -1,15 +1,9 @@
-/**
- * Pruebas de integración de la aplicación completa contra un backend simulado.
- * Además de la funcionalidad, verifican el comportamiento accesible:
- * nombres accesibles, manejo de foco, anuncios y reglas WCAG con axe.
- */
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { axe } from "jest-axe";
 
 import App from "./App";
 import { crearReceta, instalarApiFalsa } from "./pruebas/apiFalsa";
 
-/** Monta la app en una ruta y espera a que jsdom procese el hashchange inicial. */
 async function iniciarEn(hash) {
   window.location.hash = hash;
   const resultado = render(<App />);
@@ -17,10 +11,8 @@ async function iniciarEn(hash) {
   return resultado;
 }
 
-/** jsdom dispara hashchange en una tarea aparte; esto la deja ejecutarse dentro de act. */
 const esperarTareas = () => act(() => new Promise((resolver) => setTimeout(resolver, 0)));
 
-/** Cambia el hash y dispara hashchange como lo haría el navegador. */
 function navegarA(hash) {
   act(() => {
     window.location.hash = hash;
@@ -114,7 +106,6 @@ describe("Lista de recetas", () => {
     fireEvent.click(within(busqueda).getByRole("button", { name: "Buscar" }));
 
     await waitFor(() => expect(window.location.hash).toBe("#/?ingrediente=QUESO"));
-    navegarA("#/?ingrediente=QUESO");
     expect(await screen.findByRole("heading", { name: "Resultados de la búsqueda" })).toBeInTheDocument();
     await waitFor(() => expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(1));
     expect(screen.getByRole("link", { name: "Cheesecake" })).toBeInTheDocument();
@@ -143,6 +134,96 @@ describe("Lista de recetas", () => {
     caido = false;
     fireEvent.click(within(principal).getByRole("button", { name: "Reintentar" }));
     expect(await screen.findByText(/Todavía no hay recetas/)).toBeInTheDocument();
+  });
+});
+
+describe("Búsqueda en tiempo real", () => {
+  const pizzas = [
+    crearReceta({ id: "p1", nombre: "Pizza margarita", creadaEn: "2026-11-01T15:00:00.000Z" }),
+    crearReceta({
+      id: "p2",
+      nombre: "Pizza jamón y queso",
+      creadaEn: "2026-11-02T15:00:00.000Z",
+      ingredientes: [{ nombre: "Jamón", cantidad: 100, unidad: "g" }],
+    }),
+    crearReceta({ id: "p3", nombre: "Pizza", creadaEn: "2026-11-03T15:00:00.000Z" }),
+    crearReceta({ id: "p4", nombre: "Pizza", creadaEn: "2026-11-10T15:00:00.000Z" }),
+    crearReceta({ id: "f1", nombre: "Flan" }),
+  ];
+
+  const consultasDeNombre = (api) =>
+    api.llamadas.filter((l) => l.metodo === "GET" && l.consulta.includes("nombre="));
+
+  test("muestra las fichas que contienen el texto mientras se escribe, sin presionar Buscar", async () => {
+    instalarApiFalsa({ recetas: pizzas });
+    const { container } = await iniciarEn("#/");
+    await screen.findByRole("link", { name: "Flan" });
+
+    const campo = screen.getByLabelText("Nombre de la receta");
+    campo.focus();
+    fireEvent.change(campo, { target: { value: "piz" } });
+
+    await waitFor(() => expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(4));
+    expect(window.location.hash).toBe("#/?nombre=piz");
+    expect(screen.getByRole("link", { name: "Pizza margarita" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Pizza jamón y queso" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Flan" })).toBeNull();
+    expect(screen.getByRole("heading", { name: "Resultados de la búsqueda" })).toBeInTheDocument();
+    expect(campo).toHaveFocus();
+    expect(container.querySelectorAll(".tarjeta-receta mark")).toHaveLength(4);
+    await waitFor(() => expect(regionDeAnuncios()).toHaveTextContent("4 recetas encontradas."));
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  test("las recetas con el mismo nombre aparecen en fichas separadas y distinguibles", async () => {
+    instalarApiFalsa({ recetas: pizzas });
+    await iniciarEn("#/?nombre=pizza");
+
+    await waitFor(() => expect(screen.getAllByRole("link", { name: "Pizza" })).toHaveLength(2));
+    const [primera, segunda] = screen.getAllByRole("link", { name: "Pizza" });
+    expect(primera.getAttribute("href")).not.toBe(segunda.getAttribute("href"));
+    expect(primera).toHaveAccessibleDescription(/Creada el 3 de noviembre de 2026/);
+    expect(segunda).toHaveAccessibleDescription(/Creada el 10 de noviembre de 2026/);
+  });
+
+  test("escribir varias letras seguidas hace una sola petición", async () => {
+    const api = instalarApiFalsa({ recetas: pizzas });
+    await iniciarEn("#/");
+    await screen.findByRole("link", { name: "Flan" });
+
+    const campo = screen.getByLabelText("Nombre de la receta");
+    ["p", "pi", "piz", "pizz", "pizza"].forEach((valor) => fireEvent.change(campo, { target: { value: valor } }));
+
+    await waitFor(() => expect(window.location.hash).toBe("#/?nombre=pizza"));
+    await waitFor(() => expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(4));
+    expect(consultasDeNombre(api).map((l) => l.consulta)).toEqual(["?pagina=1&nombre=pizza"]);
+  });
+
+  test("no borra el espacio que se está escribiendo y permite seguir la búsqueda", async () => {
+    instalarApiFalsa({ recetas: pizzas });
+    await iniciarEn("#/");
+    await screen.findByRole("link", { name: "Flan" });
+
+    const campo = screen.getByLabelText("Nombre de la receta");
+    fireEvent.change(campo, { target: { value: "pizza " } });
+    await waitFor(() => expect(window.location.hash).toBe("#/?nombre=pizza"));
+    expect(campo).toHaveValue("pizza ");
+
+    fireEvent.change(campo, { target: { value: "pizza ja" } });
+    await waitFor(() => expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(1));
+    expect(screen.getByRole("link", { name: "Pizza jamón y queso" })).toBeInTheDocument();
+  });
+
+  test("Limpiar vuelve a mostrar todas las recetas", async () => {
+    instalarApiFalsa({ recetas: pizzas });
+    await iniciarEn("#/?nombre=flan");
+    await waitFor(() => expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(1));
+
+    fireEvent.click(screen.getByRole("button", { name: "Limpiar" }));
+    expect(window.location.hash).toBe("#/");
+    expect(screen.getByLabelText("Nombre de la receta")).toHaveValue("");
+    await waitFor(() => expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(5));
+    expect(screen.getByRole("heading", { name: "Todas las recetas" })).toBeInTheDocument();
   });
 });
 
