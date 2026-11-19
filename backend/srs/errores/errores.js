@@ -34,3 +34,23 @@ export class ErrorNoEncontrado extends ErrorApp {
     super(`${recurso} no encontrado.`, 404);
   }
 }
+
+export class ErrorCuerpoInvalido extends ErrorApp {
+  constructor() {
+    super("El cuerpo de la petición no es un JSON válido.", 400);
+  }
+}
+
+export class ErrorCuerpoDemasiadoGrande extends ErrorApp {
+  constructor() {
+    super("El cuerpo de la petición es demasiado grande.", 413);
+  }
+}
+
+/** Error inesperado: guarda la causa para el registro, pero no la muestra al cliente. */
+export class ErrorInterno extends ErrorApp {
+  constructor(causa) {
+    super("Error interno del servidor.", 500);
+    this.causa = causa;
+  }
+}
