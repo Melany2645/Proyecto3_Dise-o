@@ -1,6 +1,9 @@
 import { ConsultaRepository } from "./ConsulrasCambios.js";
 
 /**
+ * Implementa el historial de consultas guardando y leyendo IDs en un archivo JSON.
+ *
+/**
  * una lista de ids con la receta más reciente primero, sin repetidos.
  * Se guardan más de las que se muestran (historialMaximo) para que, si se
  * elimina una receta, la lista de "recientes" se pueda seguir completando.

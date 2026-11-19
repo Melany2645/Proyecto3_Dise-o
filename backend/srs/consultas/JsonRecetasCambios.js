@@ -1,7 +1,10 @@
 import { RecetaRepository } from "./RecetasCambios.js";
 
 /**
- * Patrón Repository: guarda las recetas en un archivo .json.
+ * Implementa el acceso a recetas en JSON y convierte registros guardados en objetos Receta.
+ */
+/**
+ * Guarda las recetas en un archivo .json.
  * Traduce entre los objetos Receta y los registros planos del archivo
  * (usa la fábrica para reconstruir las recetas al leer).
  */

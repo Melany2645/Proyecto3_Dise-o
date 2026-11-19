@@ -2,6 +2,9 @@ import { Ingrediente } from "./Ingredientes.js";
 import { normalizar } from "../utilidades/texto.js";
 
 /**
+ * Representa una receta y concentra operaciones propias como modificarla o buscar en ella.
+ */
+/**
  * Una receta de repostería. Los dos componentes importantes de una receta, las porciones y los ingredintes
  *  porciones: cuántas porciones rinde la receta con las cantidades indicadas
  *  ingredientes: cada uno con su cantidad y unidad de medida.

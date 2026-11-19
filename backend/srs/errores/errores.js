@@ -1,5 +1,8 @@
 /**
- * Jerarquía de errores de la aplicación (Polimorfismo).
+ * Define errores de aplicación con su estado HTTP y, cuando aplica, detalles de validación.
+ */
+
+/**
  * Cada error sabe su código HTTP y cómo convertirse en respuesta, así el
  * manejador de errores no necesita preguntar de qué tipo es cada uno.
  */

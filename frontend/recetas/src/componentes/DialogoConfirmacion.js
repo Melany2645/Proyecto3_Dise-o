@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
  *    destructiva); al cerrar, vuelve al elemento que lo abrió.
  *  - Título y mensaje se asocian con aria-labelledby / aria-describedby.
  *
- * Patrón WAI-ARIA APG: "Dialog (Modal)" / "Alert Dialog".
+ * Aquí se aplica el patrón WAI-ARIA APG
  */
 export function DialogoConfirmacion({
   abierto,
@@ -87,7 +87,12 @@ export function DialogoConfirmacion({
         )}
 
         <div className="d-flex flex-wrap justify-content-end gap-2 mt-3">
-          <button ref={botonCancelar} type="button" className="btn btn-outline-secondary" onClick={cancelar}>
+          <button
+            ref={botonCancelar}
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={cancelar}
+          >
             Cancelar
           </button>
           <button

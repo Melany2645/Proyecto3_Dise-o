@@ -1,3 +1,7 @@
+/**
+ * Define las operaciones que cualquier almacenamiento del historial de consultas debe ofrecer.
+ */
+
 export class ConsultaRepository {
   /** Registra que se consultó la receta `id` (queda como la más reciente). */
   async registrar(_id) {

@@ -1,3 +1,7 @@
+/**
+ * Configura Express y conecta las dependencias concretas para construir la aplicación.
+ */
+
 import path from "node:path";
 import cors from "cors";
 import express from "express";

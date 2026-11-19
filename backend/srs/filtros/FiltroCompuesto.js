@@ -1,3 +1,7 @@
+/**
+ * Agrupa filtros y acepta una receta solo si esta cumple todos sus criterios.
+ */
+
 import { Filtro } from "./Filtro.js";
 
 export class FiltroCompuesto extends Filtro {

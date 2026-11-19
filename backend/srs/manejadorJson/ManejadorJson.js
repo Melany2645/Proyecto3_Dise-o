@@ -1,6 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+/**
+ * Lee y actualiza datos JSON en disco, serializando operaciones para evitar escrituras concurrentes.
+ */
 export class JsonFileStore {
   #ruta;
   #valorInicial;

@@ -1,3 +1,7 @@
+/**
+ * Convierte los criterios de búsqueda recibidos en filtros concretos y compuestos.
+ */
+
 import { FiltroCompuesto } from "./FiltroCompuesto.js";
 import { FiltroPorIngrediente } from "./FiltroPorIngrediente.js";
 import { FiltroPorNombre } from "./FiltroPorNombre.js";

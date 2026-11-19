@@ -1,3 +1,7 @@
+/**
+ * Define las operaciones de persistencia que necesita el servicio para gestionar recetas.
+ */
+
 export class RecetaRepository {
   /** @returns {Promise<import('../models/Receta.js').Receta[]>} */
   async buscarTodas() {

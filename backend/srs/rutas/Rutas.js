@@ -1,3 +1,6 @@
+/**
+ * Asocia los métodos HTTP y las rutas de recetas con las acciones del controlador.
+ */
 import { Router } from "express";
 
 export function crearRutasReceta(controlador) {

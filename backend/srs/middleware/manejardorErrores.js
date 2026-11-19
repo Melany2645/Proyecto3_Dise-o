@@ -5,6 +5,9 @@ import {
   ErrorInterno,
 } from "../errores/errores.js";
 
+/**
+ * Convierte rutas inexistentes y errores de la aplicación en respuestas HTTP uniformes.
+ */
 /** Errores que lanza Express y su equivalente en la jerarquía de ErrorApp. */
 const ERRORES_DE_EXPRESS = {
   "entity.parse.failed": () => new ErrorCuerpoInvalido(),

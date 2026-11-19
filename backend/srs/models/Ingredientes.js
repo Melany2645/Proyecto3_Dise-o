@@ -1,6 +1,9 @@
 import { normalizar } from "../utilidades/texto.js";
 
 /**
+ * Representa un ingrediente con nombre, cantidad y unidad, y ofrece su serialización.
+ */
+/**
  * Un ingrediente de una receta: qué es, cuánto se usa y en qué medida.
  */
 export class Ingrediente {

@@ -5,14 +5,16 @@ export const MAX_PORCIONES = 1000;
 /** Devuelve el número de porciones si el texto es válido, o null. */
 export function interpretarPorciones(texto) {
   const numero = Number(texto);
-  return Number.isInteger(numero) && numero >= 1 && numero <= MAX_PORCIONES ? numero : null;
+  return Number.isInteger(numero) && numero >= 1 && numero <= MAX_PORCIONES
+    ? numero
+    : null;
 }
 
 /**
  * Control para elegir cuántas porciones se quieren preparar.
  * - Campo numérico con <label> visible y botones −/+ con nombre accesible.
  * - Si el valor no es válido se marca con aria-invalid y se explica el
- *   problema con un mensaje asociado por aria-describedby (WCAG 3.3.1).
+ *   problema con un mensaje asociado por aria-describedby.
  *
  * @param {{texto: string, alCambiar: (texto: string) => void, original: number}} props
  */
@@ -68,7 +70,11 @@ export function AjustePorciones({ texto, alCambiar, original }) {
           </button>
         </div>
         {valor !== original && (
-          <button type="button" className="btn btn-link" onClick={() => alCambiar(String(original))}>
+          <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => alCambiar(String(original))}
+          >
             Volver a {original}
           </button>
         )}
@@ -80,7 +86,8 @@ export function AjustePorciones({ texto, alCambiar, original }) {
         </p>
       )}
       <p id={idAyuda} className="form-text mb-0">
-        La receta original rinde {original}. Las cantidades se recalculan automáticamente.
+        La receta original rinde {original}. Las cantidades se recalculan
+        automáticamente.
       </p>
     </div>
   );

@@ -1,3 +1,7 @@
+/**
+ * Construye recetas nuevas o reconstruye sus objetos a partir de registros guardados.
+ */
+
 import { randomUUID } from "node:crypto";
 import { Receta } from "../models/Receta.js";
 
