@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "9cc2e374-f0ec-4857-a34c-028b5104a9c7",
+    "nombre": "Tres leches",
+    "porciones": 9,
+    "ingredientes": [
+      {
+        "nombre": "Leche",
+        "cantidad": 1,
+        "unidad": "l"
+      }
+    ],
+    "creadaEn": "2026-11-19T04:04:06.814Z",
+    "actualizadaEn": "2026-11-19T04:04:06.814Z"
+  }
+]

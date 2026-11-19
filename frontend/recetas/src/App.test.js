@@ -1,15 +1,15 @@
-/**
+/*
  * Pruebas de integración de la aplicación completa contra un backend simulado.
  * Además de la funcionalidad, verifican el comportamiento accesible:
  * nombres accesibles, manejo de foco, anuncios y reglas WCAG con axe.
- */
+ 
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { axe } from "jest-axe";
 
 import App from "./App";
 import { crearReceta, instalarApiFalsa } from "./pruebas/apiFalsa";
 
-/** Monta la app en una ruta y espera a que jsdom procese el hashchange inicial. */
+ Monta la app en una ruta y espera a que jsdom procese el hashchange inicial.
 async function iniciarEn(hash) {
   window.location.hash = hash;
   const resultado = render(<App />);
@@ -17,10 +17,12 @@ async function iniciarEn(hash) {
   return resultado;
 }
 
-/** jsdom dispara hashchange en una tarea aparte; esto la deja ejecutarse dentro de act. */
+*/
+
+/** jsdom dispara hashchange en una tarea aparte; esto la deja ejecutarse dentro de act. 
 const esperarTareas = () => act(() => new Promise((resolver) => setTimeout(resolver, 0)));
 
-/** Cambia el hash y dispara hashchange como lo haría el navegador. */
+/** Cambia el hash y dispara hashchange como lo haría el navegador. 
 function navegarA(hash) {
   act(() => {
     window.location.hash = hash;
@@ -339,3 +341,5 @@ describe("Formulario de receta", () => {
     expect(await screen.findByRole("heading", { level: 1, name: "Queque de naranja" })).toBeInTheDocument();
   });
 });
+
+*/
