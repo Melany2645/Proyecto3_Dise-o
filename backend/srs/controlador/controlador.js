@@ -1,6 +1,14 @@
 export class Controlador {
   #servicio;
 
+  /*
+ A pesar, que esta clase se relacione con los directrices,
+ aquí se aplica la indirección, por ser intermediaria entre las
+ solicitudes HTTP y el servicio, para que ambas cosas no tenga que 
+ interactuar entre sí, esta clase se encarga de traducir las diferentes 
+ solicitudes y dirigirlas al servicio.  
+*/
+
   constructor(servicio) {
     this.#servicio = servicio;
   }

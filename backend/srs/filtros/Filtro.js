@@ -4,3 +4,5 @@ export class Filtro {
     throw new Error("Método no implementado: cumple");
   }
 }
+
+// Aquí se aplica polimorfismo por la herencia de un método abstracto hacía sus clases hijas

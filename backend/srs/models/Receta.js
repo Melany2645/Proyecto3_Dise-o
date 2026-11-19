@@ -5,6 +5,11 @@ import { normalizar } from "../utilidades/texto.js";
  * Una receta de repostería. Los dos componentes importantes de una receta, las porciones y los ingredintes
  *  porciones: cuántas porciones rinde la receta con las cantidades indicadas
  *  ingredientes: cada uno con su cantidad y unidad de medida.
+ *
+ * La manera en la que se aplica este patrón es que solo la clase Receta conoce
+ * su información, por ende, solo ella debe de modificarse y responder a consultas
+ * que tengan que ver con su contenido, esto ayuda a prevenir que otras clases tengan
+ * acceso innecesario a su información y contenido.
  */
 export class Receta {
   constructor({

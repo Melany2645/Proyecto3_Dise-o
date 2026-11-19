@@ -1,23 +1,32 @@
 :root {
-  --color-primario: #8a3b12;
-  --color-primario-oscuro: #6b2d0d;
-  --color-primario-mas-oscuro: #52220a;
-  --color-fondo-suave: #fbf5ef;
-  --color-texto: #212529;
-  --color-borde: #8c8c8c;
-  --color-foco: #1f4fd1;
+  --color-strawberry-red: #b52c4b;
+  --color-jam-red: #761d35;
+  --color-soft-berry: #8c5264;
+  --color-cream-pink: #f4dee3;
+  --color-cheesecake-cream: #fff4e3;
+  --color-camel: #816245;
+
+  --color-primario: var(--color-strawberry-red);
+  --color-primario-oscuro: var(--color-jam-red);
+  --color-primario-mas-oscuro: var(--color-jam-red);
+  --color-fondo-suave: var(--color-cream-pink);
+  --color-texto: #34242b;
+  --color-borde: var(--color-camel);
+  --color-foco: var(--color-soft-berry);
 
   --bs-link-color: var(--color-primario);
-  --bs-link-color-rgb: 138, 59, 18;
+  --bs-link-color-rgb: 181, 44, 75;
   --bs-link-hover-color: var(--color-primario-mas-oscuro);
-  --bs-link-hover-color-rgb: 82, 34, 10;
+  --bs-link-hover-color-rgb: 118, 29, 53;
   --bs-primary: var(--color-primario);
-  --bs-primary-rgb: 138, 59, 18;
+  --bs-primary-rgb: 181, 44, 75;
+  --bs-danger: var(--color-jam-red);
+  --bs-danger-rgb: 118, 29, 53;
   --bs-border-color: var(--color-borde);
 }
 
 body {
-  background-color: #ffffff;
+  background-color: var(--color-cheesecake-cream);
   color: var(--color-texto);
   min-height: 100vh;
   display: flex;
@@ -74,7 +83,7 @@ main:focus,
 
 .encabezado-sitio {
   background-color: var(--color-fondo-suave);
-  border-bottom: 1px solid #e3d5c8;
+  border-bottom: 1px solid var(--color-camel);
 }
 
 .marca {
@@ -107,7 +116,7 @@ main:focus,
 
 .pie-sitio {
   background-color: var(--color-fondo-suave);
-  border-top: 1px solid #e3d5c8;
+  border-top: 1px solid var(--color-camel);
   font-size: 0.9rem;
 }
 
@@ -138,16 +147,25 @@ main:focus,
   --bs-btn-disabled-border-color: var(--color-primario);
 }
 
+.btn-outline-danger {
+  --bs-btn-color: var(--color-jam-red);
+  --bs-btn-border-color: var(--color-jam-red);
+  --bs-btn-hover-bg: var(--color-jam-red);
+  --bs-btn-hover-border-color: var(--color-jam-red);
+  --bs-btn-active-bg: var(--color-jam-red);
+  --bs-btn-active-border-color: var(--color-jam-red);
+}
+
 .tarjeta-busqueda,
 .tarjeta-recientes {
   background-color: var(--color-fondo-suave);
-  border: 1px solid #e3d5c8;
+  border: 1px solid var(--color-camel);
   border-radius: 0.5rem;
   padding: 1.25rem;
 }
 
 .tarjeta-receta {
-  border-color: #d9c7b6;
+  border-color: var(--color-soft-berry);
 }
 
 .tarjeta-receta:hover,
@@ -162,8 +180,8 @@ main:focus,
 }
 
 .tarjeta-receta mark {
-  background-color: #ffe08a;
-  color: #212529;
+  background-color: var(--color-cream-pink);
+  color: var(--color-jam-red);
   padding: 0 0.1em;
   border-radius: 0.2em;
   font-weight: 700;
@@ -174,7 +192,7 @@ main:focus,
 }
 
 .estado-vacio {
-  border: 2px dashed #d9c7b6;
+  border: 2px dashed var(--color-soft-berry);
   border-radius: 0.5rem;
   padding: 1.5rem;
   text-align: center;
@@ -184,7 +202,7 @@ main:focus,
   --bs-pagination-active-bg: var(--color-primario);
   --bs-pagination-active-border-color: var(--color-primario);
   --bs-pagination-hover-color: var(--color-primario-mas-oscuro);
-  --bs-pagination-disabled-color: #5c636a;
+  --bs-pagination-disabled-color: var(--color-soft-berry);
 }
 
 #titulo-resultados:focus {
@@ -192,7 +210,7 @@ main:focus,
 }
 
 .breadcrumb {
-  --bs-breadcrumb-item-active-color: #5c636a;
+  --bs-breadcrumb-item-active-color: var(--color-soft-berry);
 }
 
 .datos-receta {
@@ -205,7 +223,7 @@ main:focus,
 .datos-receta dt {
   font-weight: 400;
   font-size: 0.875rem;
-  color: #5c636a;
+  color: var(--color-soft-berry);
 }
 
 .datos-receta dd {
@@ -215,7 +233,7 @@ main:focus,
 
 .ajuste-porciones {
   background-color: var(--color-fondo-suave);
-  border: 1px solid #e3d5c8;
+  border: 1px solid var(--color-camel);
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
@@ -226,7 +244,7 @@ main:focus,
 }
 
 .texto-error {
-  color: #a4161a;
+  color: var(--color-jam-red);
   font-weight: 600;
 }
 
@@ -241,7 +259,7 @@ main:focus,
 }
 
 .grupo-formulario {
-  border: 1px solid #e3d5c8;
+  border: 1px solid var(--color-camel);
   border-radius: 0.5rem;
   padding: 1.25rem;
   margin-bottom: 1.5rem;
@@ -277,11 +295,11 @@ main:focus,
 }
 
 .form-control.is-invalid {
-  border-color: #a4161a;
+  border-color: var(--color-jam-red);
 }
 
 .resumen-errores {
-  border: 3px solid #a4161a;
+  border: 3px solid var(--color-jam-red);
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   margin-bottom: 1.5rem;
@@ -294,11 +312,11 @@ main:focus,
 }
 
 .resumen-errores h2 {
-  color: #a4161a;
+  color: var(--color-jam-red);
 }
 
 .resumen-errores a {
-  color: #a4161a;
+  color: var(--color-jam-red);
   font-weight: 600;
 }
 

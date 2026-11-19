@@ -67,7 +67,7 @@ El objetivo es cumplir **WCAG 2.2 nivel AA** y seguir los patrones de la guía *
 | 1.1.1 Contenido no textual | Los símbolos decorativos (« » + −) llevan `aria-hidden`; los botones de ícono tienen un nombre accesible. |
 | 1.3.1 Información y relaciones | Regiones (`header`, `nav`, `main`, `footer`), encabezados en orden (h1 → h2 → h3), `fieldset`/`legend` en el formulario, tabla con `caption`, `scope="col"` y `scope="row"`, listas `ul`/`ol` y datos en `dl`. |
 | 1.4.1 Uso del color | La página actual, los errores y los estados se indican también con texto, subrayado o grosor, no solo con color. |
-| 1.4.3 / 1.4.11 Contraste | Color principal `#8a3b12` (8:1), errores `#a4161a` (7:1), bordes de controles de 3:1 o más. |
+| 1.4.3 / 1.4.11 Contraste | Paleta: Strawberry Red `#B52C4B`, Jam Red `#761D35`, Soft Berry `#8C5264`, Cream Pink `#F4DEE3`, Cheesecake Cream `#FFF4E3` y Camel `#816245`. Strawberry Red sobre Cheesecake Cream: 5.6:1; Jam Red para errores: 9.7:1; Camel para bordes sobre Cheesecake Cream: 5.1:1. |
 | 2.1.1 Teclado | Todo es operable con teclado, sin `tabindex` positivos ni elementos `div` que se puedan hacer clic. |
 | 2.3.3 Animaciones | Se respeta `prefers-reduced-motion`. |
 | 2.4.1 Saltar bloques | Enlace "Saltar al contenido principal", visible al recibir el foco. |

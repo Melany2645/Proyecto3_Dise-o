@@ -1,1 +1,99 @@
-[]
+[
+  {
+    "id": "720b85f3-4fa1-4dce-928b-ddd1a980f9b5",
+    "nombre": "Tres leches",
+    "porciones": 9,
+    "ingredientes": [
+      {
+        "nombre": "Leche",
+        "cantidad": 25,
+        "unidad": "ml"
+      },
+      {
+        "nombre": "Huevos",
+        "cantidad": 3,
+        "unidad": "unidad"
+      },
+      {
+        "nombre": "Harina",
+        "cantidad": 300,
+        "unidad": "mg"
+      },
+      {
+        "nombre": "Vainilla",
+        "cantidad": 1,
+        "unidad": "cucharadita"
+      },
+      {
+        "nombre": "Azúcar",
+        "cantidad": 350,
+        "unidad": "mg"
+      }
+    ],
+    "creadaEn": "2026-11-19T05:44:49.199Z",
+    "actualizadaEn": "2026-11-19T05:44:49.199Z"
+  },
+  {
+    "id": "44961bf8-cdcc-4733-9650-41b6197a0647",
+    "nombre": "Pizza",
+    "porciones": 10,
+    "ingredientes": [
+      {
+        "nombre": "Masa",
+        "cantidad": 1,
+        "unidad": "unidad"
+      },
+      {
+        "nombre": "Salsa de tomate",
+        "cantidad": 100,
+        "unidad": "mg"
+      },
+      {
+        "nombre": "Queso",
+        "cantidad": 300,
+        "unidad": "mg"
+      },
+      {
+        "nombre": "Jamón",
+        "cantidad": 25,
+        "unidad": "unidad"
+      }
+    ],
+    "creadaEn": "2026-11-19T05:46:24.075Z",
+    "actualizadaEn": "2026-11-19T05:46:24.075Z"
+  },
+  {
+    "id": "6779d017-4f7c-4289-9e76-36949cf0c11c",
+    "nombre": "Pizza Piña",
+    "porciones": 10,
+    "ingredientes": [
+      {
+        "nombre": "Masa",
+        "cantidad": 1,
+        "unidad": "unidad"
+      },
+      {
+        "nombre": "Tomate",
+        "cantidad": 100,
+        "unidad": "mg"
+      },
+      {
+        "nombre": "Queso",
+        "cantidad": 300,
+        "unidad": "mg"
+      },
+      {
+        "nombre": "Piña",
+        "cantidad": 25,
+        "unidad": "pedazos"
+      },
+      {
+        "nombre": "Jamón",
+        "cantidad": 25,
+        "unidad": "pedazos"
+      }
+    ],
+    "creadaEn": "2026-11-19T05:48:34.754Z",
+    "actualizadaEn": "2026-11-19T05:48:34.754Z"
+  }
+]
