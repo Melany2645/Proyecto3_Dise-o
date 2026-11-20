@@ -2,6 +2,8 @@
 
 Proyecto 3 de Diseño de Software. Melany Jirón y Jeremy Montero.
 
+Enlace de repositorio: https://github.com/Melany2645/Proyecto3_Dise-o.git 
+
 Aplicación para registrar recetas de repostería, buscarlas por nombre o ingrediente, consultar las vistas recientemente y ajustar las cantidades según las porciones.
 
 | Parte | Tecnología | Carpeta | Puerto |
